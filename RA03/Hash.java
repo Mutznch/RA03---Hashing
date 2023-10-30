@@ -1,11 +1,12 @@
 public class Hash {
     private Node[] tabela;
     private int tamanho;
-    private int colisoes = 0;
+    private int colisoes;
 
     public Hash(int tamanho) {
         this.tamanho = tamanho;
         tabela = new Node[tamanho];
+        colisoes = 0;
     }
 
     public void inserirRestoDivisao(Registro valor) {
@@ -17,25 +18,24 @@ public class Hash {
     }
 
     public void inserirSomaDosAlgarismos(Registro valor) {
+        int n = valor.getCodigo();
         int hashed = 0;
-        int j = 1;
-        for (int i = 100000000; i >= 1; i = i / 10) {
-            hashed += (valor.getCodigo() / i) % j;
-            j = j * 10;
+        while (n > 0) {
+            hashed += n % 10;
+            n /= 10;
         } inserir(valor, hashed % tamanho);
     }
 
     public boolean buscarSomaDosAlgarismos(int valor) {
         int hashed = 0;
-        int j = 1;
-        for (int i = 100000000; i >= 1; i = i / 10) {
-            hashed += (valor / i) % j;
-            j = j * 10;
+        while (valor > 0) {
+            hashed += valor % 10;
+            valor /= 10;
         } return buscar(valor, hashed % tamanho);
     }
 
     public void inserirDobramento(Registro valor) {
-        int hashed = (valor.getCodigo() / 100000) + (valor.getCodigo() % 10000);
+        int hashed = (valor.getCodigo() / 10000) + (valor.getCodigo() % 10000);
         inserir(valor, hashed % tamanho);
     }
 
