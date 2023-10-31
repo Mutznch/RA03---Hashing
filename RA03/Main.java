@@ -3,7 +3,7 @@ import java.util.Random;
 public class Main {
     static Random rnd = new Random(-2147483647);
     public static void main(String[] args) {
-        int tamanhoTabela = 10;
+        int tamanhoTabela = 100000;
         int tamanhoVetor = 5000000;
 
         Hash hash1 = new Hash(tamanhoTabela);
@@ -43,31 +43,28 @@ public class Main {
         valores[3] = 501196423;
         valores[4] = 890049968;
 
-        int soma = 0;
-        for (int i = 0; i < 5; i++) {
-            tempo = System.currentTimeMillis();
+        Hash.comparacoes = 0;
+        tempo = System.currentTimeMillis();
+        for (int i = 0; i < 5; i++)
             hash1.buscarRestoDivisao(valores[i]);
-            tempo = System.currentTimeMillis() - tempo;
-            soma += tempo;
-            System.out.println("\n\nTempo Busca Resto Divisão: " + tempo);
-        } System.out.println("\nMédia Tempo Busca Resto Divisão: " + soma * .2d);
+        tempo = System.currentTimeMillis() - tempo;
+        System.out.println("\nTempo Busca Resto Divisão: " + tempo +
+                "\nComparações Busca Resto Divisão: " + Hash.comparacoes);
 
-        soma = 0;
-        for (int i = 0; i < 5; i++) {
-            tempo = System.currentTimeMillis();
+        Hash.comparacoes = 0;
+        tempo = System.currentTimeMillis();
+        for (int i = 0; i < 5; i++)
             hash2.buscarSomaDosAlgarismos(valores[i]);
-            tempo = System.currentTimeMillis() - tempo;
-            soma += tempo;
-            System.out.println("\nTempo Busca Soma Algarismos: " + tempo);
-        } System.out.println("\nMédia Tempo Busca Soma Algarismos: " + soma * .2d);
+        tempo = System.currentTimeMillis() - tempo;
+        System.out.println("\nTempo Busca Soma Algarismos: " + tempo +
+                "\nComparações Busca Soma Algarismos: " + Hash.comparacoes);
 
-        soma = 0;
-        for (int i = 0; i < 5; i++) {
-            tempo = System.currentTimeMillis();
+        Hash.comparacoes = 0;
+        tempo = System.currentTimeMillis();
+        for (int i = 0; i < 5; i++)
             hash3.buscarDobramento(valores[i]);
-            tempo = System.currentTimeMillis() - tempo;
-            soma += tempo;
-            System.out.println("\nTempo Busca Dobramento: " + tempo);
-        } System.out.println("\nMédia Tempo Busca Dobramento: " + soma * .2d);
+        tempo = System.currentTimeMillis() - tempo;
+        System.out.println("\nTempo Busca Dobramento: " + tempo +
+                "\nComparações Busca Dobramento: " + Hash.comparacoes);
     }
 }

@@ -17,6 +17,7 @@ public class Node {
     }
 
     public boolean buscar(int elemento) {
+        Hash.comparacoes++;
         if (chave.getCodigo() == elemento) return true;
         if (proximo == null) return false;
         return proximo.buscar(elemento);

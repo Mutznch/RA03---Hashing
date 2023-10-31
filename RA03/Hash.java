@@ -2,11 +2,13 @@ public class Hash {
     private Node[] tabela;
     private int tamanho;
     private int colisoes;
+    public static int comparacoes;
 
     public Hash(int tamanho) {
         this.tamanho = tamanho;
         tabela = new Node[tamanho];
         colisoes = 0;
+        comparacoes = 0;
     }
 
     public void inserirRestoDivisao(Registro valor) {
@@ -23,15 +25,18 @@ public class Hash {
         while (n > 0) {
             hashed += n % 10;
             n /= 10;
-        } inserir(valor, hashed % tamanho);
+        } hashed = valor.getCodigo() / hashed;
+        inserir(valor, hashed % tamanho);
     }
 
     public boolean buscarSomaDosAlgarismos(int valor) {
+        int n = valor;
         int hashed = 0;
-        while (valor > 0) {
-            hashed += valor % 10;
-            valor /= 10;
-        } return buscar(valor, hashed % tamanho);
+        while (n > 0) {
+            hashed += n % 10;
+            n /= 10;
+        } hashed = valor / hashed;
+        return buscar(valor, hashed % tamanho);
     }
 
     public void inserirDobramento(Registro valor) {
@@ -40,7 +45,7 @@ public class Hash {
     }
 
     public boolean buscarDobramento(int valor) {
-        int hashed = (valor / 100000) + (valor % 10000);
+        int hashed = (valor / 10000) + (valor % 10000);
         return buscar(valor, hashed % tamanho);
     }
 
